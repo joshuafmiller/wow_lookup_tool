@@ -287,8 +287,9 @@ def glad_or_bad():
                 if re.search('Gladiator: ', item):
                     print(item)
 
-            if len(response) <= 2:
+            if len(response) == 2:
                 print("This character is Bad, not Glad")
+
 
 
 #main menu
