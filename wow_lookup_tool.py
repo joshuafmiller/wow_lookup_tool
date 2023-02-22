@@ -266,26 +266,28 @@ def glad_or_bad():
             glad_url = f"https://us.api.blizzard.com/profile/wow/character/{user_realm}/{user_name}/achievements?namespace=profile-us&locale=en_US&access_token=USa64cPNwfHW4DmbGr1a4Jyeppy2KhCUeG"
             glad_req = requests.get(glad_url)
             glad = glad_req.json()
-            response = set()
+            response = {'', ''}
             response_if_title = ""
             if glad_req.status_code == 200:
                 for item in glad['achievements']:
                     if re.search('Gladiator: ', item['achievement']['name']):
                         response.add(f"{item['achievement']['name']}")
                         response_if_title = "This character has the following Glad titles:"
+
                     else:
                         response.add("This character is Bad, not Glad")
+
                         continue
             else:
                 print("Please enter valid information")
 
             print(response_if_title)
             print("")
-            for item in response:
+            for item in sorted(response):
                 if re.search('Gladiator: ', item):
                     print(item)
 
-            if len(response) <= 1:
+            if len(response) <= 2:
                 print("This character is Bad, not Glad")
 
 
