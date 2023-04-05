@@ -1,8 +1,5 @@
-#make character and leaderboard requests concurent
-#lookup async io python
-#this is to increase performance
-#teddy boy
-# adding a comment
+#api key is not static from Blizzard.  will need to generate and add a valid api key before use to the following variable
+api_key= ""
 
 #3v3 lookup function
 def character_3v3():
@@ -44,9 +41,8 @@ def character_3v3():
             print("Navigating to main menu...")
             home()
             
-
-        character_url = f"https://us.api.blizzard.com/profile/wow/character/{user_realm}/{user_name}/pvp-bracket/3v3?namespace=profile-us&locale=en_US&access_token=USa64cPNwfHW4DmbGr1a4Jyeppy2KhCUeG"
-        leaderboard_url = "https://us.api.blizzard.com/data/wow/pvp-season/34/pvp-leaderboard/3v3?namespace=dynamic-us&locale=en_US&access_token=USa64cPNwfHW4DmbGr1a4Jyeppy2KhCUeG"
+        character_url = f"https://us.api.blizzard.com/profile/wow/character/{user_realm}/{user_name}/pvp-bracket/3v3?namespace=profile-us&locale=en_US&access_token={api_key}"
+        leaderboard_url = f"https://us.api.blizzard.com/data/wow/pvp-season/34/pvp-leaderboard/3v3?namespace=dynamic-us&locale=en_US&access_token={api_key}"
 
         character_req = requests.get(character_url)
         leaderboard_req = requests.get(leaderboard_url)
@@ -157,7 +153,7 @@ def character_shuffle():
             print("Searching...")
             print("")
 
-            solo_url = f"https://us.api.blizzard.com/data/wow/pvp-season/34/pvp-leaderboard/shuffle-{user_class}-{user_spec}?namespace=dynamic-us&locale=en_US&access_token=USa64cPNwfHW4DmbGr1a4Jyeppy2KhCUeG"
+            solo_url = f"https://us.api.blizzard.com/data/wow/pvp-season/34/pvp-leaderboard/shuffle-{user_class}-{user_spec}?namespace=dynamic-us&locale=en_US&access_token={api_key}"
             solo_req = requests.get(solo_url)
             solo_data = solo_req.json()
             if solo_req.status_code == 200:
@@ -209,7 +205,7 @@ def character_titles():
                 print("Navigating to main menu...")
                 home()
             
-            title_url = f"https://us.api.blizzard.com/profile/wow/character/{user_realm}/{user_name}/titles?namespace=profile-us&locale=en_US&access_token=USa64cPNwfHW4DmbGr1a4Jyeppy2KhCUeG"
+            title_url = f"https://us.api.blizzard.com/profile/wow/character/{user_realm}/{user_name}/titles?namespace=profile-us&locale=en_US&access_token={api_key}"
             title_req = requests.get(title_url)
             titles = title_req.json()
 
@@ -263,7 +259,7 @@ def glad_or_bad():
                 print("Navigating to main menu...")
                 home()
             
-            glad_url = f"https://us.api.blizzard.com/profile/wow/character/{user_realm}/{user_name}/achievements?namespace=profile-us&locale=en_US&access_token=USa64cPNwfHW4DmbGr1a4Jyeppy2KhCUeG"
+            glad_url = f"https://us.api.blizzard.com/profile/wow/character/{user_realm}/{user_name}/achievements?namespace=profile-us&locale=en_US&access_token={api_key}"
             glad_req = requests.get(glad_url)
             glad = glad_req.json()
             response = {'', ''}
